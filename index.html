@@ -1,0 +1,832 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>ProsperGadget | Buy Phones & Gadgets</title>  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">  
+<style>  
+/* RESET */  
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+body{background:#f6f6f6;color:#222}
+a{text-decoration:none;color:inherit}
+
+/* HEADER */
+header{
+  background:black;
+  border-bottom:1px solid #ddd;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:12px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:22px;
+  font-weight:bold;
+  color:#0a7cff;
+}
+.logo-img{
+  height:30px;
+  width:auto;
+}
+.menu-btn{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
+  color:white;
+}
+
+/* SEARCH BAR */
+.search-box{
+  display:flex;
+  width:100%;
+  max-width:100%;
+  margin-left:10px;
+}
+.search-box input{
+  flex:1;
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:4px 0 0 4px;
+  min-width:0;
+}
+.search-box button{
+  flex:none;
+  padding:10px 14px;
+  background:#0a7cff;
+  border:none;
+  color:#fff;
+  border-radius:0 4px 4px 0;
+  cursor:pointer;
+}
+
+/* NAV LINKS */
+.nav-links{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+/* DROPDOWN */
+.nav-item{
+  position:relative;
+  cursor:pointer;
+  font-weight:600;
+  color:white;
+}
+.nav-item span{
+  padding:10px;
+  display:inline-block;
+}
+.dropdown-menu{
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#fff;
+  border:1px solid #ddd;
+  min-width:220px;
+  display:none;
+  flex-direction:column;
+  z-index:999;
+}
+.dropdown-menu a{
+  padding:12px 15px;
+  border-bottom:1px solid #eee;
+  font-size:14px;
+  color:black;
+}
+.dropdown-menu a:hover{
+  background:#f2f6ff;
+  color:#0a7cff;
+}
+.dropdown-menu.show{
+  display:flex;
+}
+
+/* MOBILE MENU */
+.mobile-menu{
+  background:black;
+  overflow:hidden;
+  max-height:0;
+  transition:max-height 0.5s ease;
+}
+.mobile-menu.open{
+  max-height:900px;
+}
+.mobile-item{
+  padding:15px;
+  color:white;
+  font-weight:600;
+  border-bottom:1px solid #eee;
+  cursor:pointer;
+}
+.mobile-sub{
+  display:none;
+  background:#223;
+}
+.mobile-sub a{
+  display:block;
+  color:white;
+  padding:12px 20px;
+  border-bottom:1px solid #eee;
+}
+.mobile-sub.show{
+  display:block;
+}
+
+/* SLIDER */
+.slider{
+  max-width:1200px;
+  margin:20px auto;
+  padding:0 15px;
+}
+.slider img{
+  width:100%;
+  height:450px;
+  object-fit:cover;
+  border-radius:6px;
+}
+
+/* EXPRESS INFO */
+.express-info{
+  max-width:1200px;
+  margin:20px auto;
+  padding:0 15px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:flex-start;
+}
+.express-info div{
+  display:flex;
+  width:100%;
+  flex-direction:row;
+  gap:10px;
+  align-items:center;
+  background:#fff;
+  padding:15px;
+  border-radius:6px;
+  box-shadow:0 0 8px rgba(0,0,0,0.05);
+}
+.express-info img{
+  width:40px;
+  height:40px;
+  object-fit:contain;
+}
+.express-info h3{
+  font-size:16px;
+  margin-bottom:4px;
+  color:#0a7cff;
+}
+.express-info p{
+  font-size:14px;
+  color:#333;
+  margin:0;
+}
+
+/* CATEGORY HEADING */
+.category-heading{
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  margin:25px 0;
+}
+
+/* CATEGORY SECTIONS */
+.category-section{
+  max-width:1200px;
+  margin:30px auto;
+  padding:0 15px;
+}
+.category-section h2{
+  margin-bottom:15px;
+  color:black;
+}
+
+/* CAROUSEL GRID */
+.carousel-wrapper{
+  position:relative;
+  overflow:hidden;
+}
+.carousel{
+  display:flex;
+  gap:15px;
+  transition:transform 0.4s ease;
+  scroll-behavior:smooth;
+}
+.carousel .product{
+  min-width:48%;
+}
+
+/* Arrows */
+.carousel-btn{
+  position:absolute;
+  top:45%;
+  transform:translateY(-50%);
+  background:#0a7cff;
+  color:#fff;
+  border:none;
+  font-size:22px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:5;
+}
+.carousel-btn.left{left:5px;}
+.carousel-btn.right{right:5px;}
+
+/* PRODUCT CARDS */
+.product{
+  background:#fff;
+  padding:12px;
+  border-radius:6px;
+  border:1px solid #e5e5e5;
+}
+.product img{
+  width:100%;
+  height:160px;
+  object-fit:contain;
+  margin-bottom:8px;
+}
+.product h3{font-size:15px;margin-bottom:6px;}
+.product p{color:#0a7cff;font-weight:bold;margin-bottom:8px;}
+.product button{
+  width:100%;
+  padding:10px;
+  border:none;
+  background:#0a7cff;
+  color:#fff;
+  border-radius:4px;
+  cursor:pointer;
+}
+.product button:hover{background:#004a99}
+
+/* TRADE IN */
+.trade-in{
+  max-width:1200px;
+  margin:50px auto;
+  padding:0 15px;
+  text-align:center;
+}
+.trade-box{
+  background:#fff;
+  padding:10px;
+  border-radius:8px;
+  display:inline-block;
+  box-shadow:0 0 10px rgba(0,0,0,0.08);
+}
+.trade-box img{
+  width:100%;
+  max-width:300px;
+  border-radius:6px;
+}
+.trade-box p{
+  margin-top:10px;
+  font-weight:bold;
+  color:#0a7cff;
+}
+
+/* FOOTER */
+footer{
+  background:#111;
+  color:#ccc;
+  margin-top:40px;
+  padding-top:30px;
+}
+.footer-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:30px;
+}
+.footer-inner h4{color:#fff;margin-bottom:10px;}
+.footer-inner p{font-size:14px;line-height:1.6;}
+.footer-inner img{width:30px;margin-top:10px;}
+.footer-bottom{text-align:center;padding:15px;border-top:1px solid #333;font-size:13px;}
+.footer-images{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  padding:15px 0;
+}
+.footer-images img{
+  height:35px;
+  width:auto;
+  object-fit:contain;
+}
+
+/* ====================== MEDIA QUERIES ====================== */
+/* Small phones */
+@media(max-width:767px){
+  .slider img{height:250px;}
+  .menu-btn{display:block;}
+  .nav-links{display:none;}
+  .nav{flex-wrap:wrap;overflow-x:hidden;}
+  .logo{margin-right:0; margin-right: 82px}
+  .search-box{width:100%;margin:10px 0;}
+  .category-grid{grid-template-columns:1fr 1fr;}
+  .express-info{flex-direction:column;align-items:flex-start;}
+  .express-info div{flex-direction:row;width:100%;}
+  .carousel .product{min-width:70%;}
+  .footer-images img{height:28px;}
+}
+
+/* Tablets */
+@media(min-width:768px) and (max-width:1023px){
+  .category-grid{grid-template-columns:repeat(3,1fr);}
+  .carousel .product{min-width:45%;}
+}
+
+/* Desktop */
+@media(min-width:1024px){
+  .category-grid{grid-template-columns:repeat(4,1fr);}
+  .carousel .product{min-width:23%;}
+}
+</style>
+
+</head>  
+<body>  
+<header>  
+  <div class="nav">  
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>  
+<div class="logo">  
+  <img src="pp.png" alt="Logo" class="logo-img">  
+  ProsperGadget  
+</div> 
+<!-- DESKTOP NAV -->  
+<div class="nav-links">  
+
+  <div class="nav-item" onclick="toggleDropdown('phonesDrop')">  
+    <span>Phones & Tablet ▾</span>  
+    <div class="dropdown-menu" id="phonesDrop">  
+      <a href="android-phones.html">Android Phones</a>  
+      
+    </div>  
+  </div>  
+
+  <div class="nav-item" onclick="toggleDropdown('computerDrop')">  
+    <span>Computer ▾</span>  
+    <div class="dropdown-menu" id="computerDrop">  
+      <a href="Computer.html">Laptops</a>  
+      
+    </div>  
+  </div>  
+
+  <div class="nav-item" onclick="toggleDropdown('accessoriesDrop')">  
+    <span>Accessories ▾</span>  
+    <div class="dropdown-menu" id="accessoriesDrop">  
+      <a href="Games.html">Games and consoles</a>  
+
+      <a href="Power.html">Power Banks</a>  
+    </div>  
+  </div>  
+
+  <div class="nav-item" onclick="toggleDropdown('electronicsDrop')">  
+    
+    <div class="dropdown-menu" id="electronicsDrop">  
+
+    </div>  
+      
+</div>
+
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact</a>
+
+</div>  
+
+<!-- SEARCH -->  
+<div class="search-box">  
+  <input placeholder="Search the entire store..." id="searchInput">  
+  <button onclick="searchProduct()">Search</button>  
+</div>
+
+  </div> 
+  <!-- MOBILE MENU -->  <div class="mobile-menu" id="mobileMenu">    <div class="mobile-item" onclick="toggleMobile('mPhones')">Phones & Tablet</div>    
+  <div class="mobile-sub" id="mPhones">    
+    <a href="android-phones.html">All phones</a>    
+
+  </div>      
+  
+  <div class="mobile-item" onclick="toggleMobile('mComputer')">Computer</div>    
+  <div class="mobile-sub" id="mComputer">    
+    <a href="Computer.html">Laptops</a>    
+  </div>      
+  <div class="mobile-item" onclick="toggleMobile('mAccessories')">Accessories</div>    
+  <div class="mobile-sub" id="mAccessories">    
+    <a href="Power.html">Power Banks</a>    
+    <a href="Games.html">Other Accessories</a>    
+  </div>     
+  
+  <div class="mobile-item" onclick="toggleMobile('mAbout')">About Us</div>  
+  <div class="mobile-sub" id="mAbout">  
+    <a href="about.html">About Us</a>  
+    <a href="contact.html">Contact</a>    
+  </div>
+  </div>  
+</header> 
+
+<!-- SLIDER -->  <div class="slider">  
+  <img id="slide" src="mrp2.jpg" alt="Slider Image">  
+</div>  <!-- EXPRESS DELIVERY INFO -->  <div class="express-info">  
+  <div>  
+    <img src="lorry.png" alt="Express">  
+    <div>  
+      <h3>Express Delivery</h3>  
+      <p>Within Abia - same day delivery</p>  
+    </div>  
+  </div>  
+  <div>  
+    <img src="head.jpeg" alt="Help">  
+    <div>  
+      <h3>Need Help?</h3>  
+      <p>Call +234 9011 727 900</p>  
+    </div>  
+  </div>  
+  <div>  
+    <img src="peace.png" alt="Warranty">  
+    <div>  
+      <h3>Warranty Products</h3>  
+      <p>Peace of mind guaranteed</p>  
+    </div>  
+  </div>  
+</div>  <!-- CATEGORIES HEADING -->  <div class="category-heading">CATEGORIES</div>  <!-- CATEGORY SECTIONS -->  <div class="category-section">  
+  <h2>Phones & Tablet</h2>  
+<div class="carousel-wrapper">  
+  <button class="carousel-btn left" onclick="slideLeft('phonesGrid')">‹</button>  
+  <div id="phonesGrid" class="carousel"></div>  
+  <button class="carousel-btn right" onclick="slideRight('phonesGrid')">›</button>  
+</div>  
+</div><br><br>  <div class="category-section">  
+  <h2>Computer</h2>  
+<div class="carousel-wrapper">  
+  <button class="carousel-btn left" onclick="slideLeft('laptopsGrid')">‹</button>  
+  <div id="laptopsGrid" class="carousel"></div>  
+  <button class="carousel-btn right" onclick="slideRight('laptopsGrid')">›</button>  
+</div>  
+</div><br><br>  <div class="category-section">  
+  <h2>PowerBanks</h2>  
+<div class="carousel-wrapper">  
+  <button class="carousel-btn left" onclick="slideLeft('accessoriesGrid')">‹</button>  
+  <div id="accessoriesGrid" class="carousel"></div>  
+  <button class="carousel-btn right" onclick="slideRight('accessoriesGrid')">›</button>  
+</div>  
+</div><br><br>  <div class="category-section">  
+  <h2>Other Accessories</h2>  
+<div class="carousel-wrapper">  
+  <button class="carousel-btn left" onclick="slideLeft('gamesGrid')">‹</button>  
+  <div id="gamesGrid" class="carousel"></div>  
+  <button class="carousel-btn right" onclick="slideRight('gamesGrid')">›</button>  
+</div>  
+</div><br><br>  <div class="category-section">  
+  
+<div class="carousel-wrapper">  
+  <button class="carousel-btn left" onclick="slideLeft('electronicsGrid')">‹</button>  
+  <div id="electronicsGrid" class="carousel"></div>  
+  <button class="carousel-btn right" onclick="slideRight('electronicsGrid')">›</button>  
+</div>  
+</div><br><br>  <section class="trade-in">  
+  <h2>Trade in and Save</h2>  
+  <div class="trade-box">  
+    <img src="swap3.png" alt="Trade In">  
+    <p>(We buy, we swap)</p>  
+  </div>  
+</section>  <div class="category-section">  
+  <h2>Latest Products</h2>  
+  <div class="carousel-wrapper">  
+    <button class="carousel-btn left" onclick="slideLeft('latestGrid')">‹</button>  
+    <div id="latestGrid" class="carousel"></div>  
+    <button class="carousel-btn right" onclick="slideRight('latestGrid')">›</button>  
+  </div>  
+</div>  <!-- FOOTER -->  <footer>  
+  <div class="footer-inner">  
+    <div>  
+      <h4>ProsperGadget</h4>  
+      <p>Your trusted store for original phones, laptops, and electronics.</p>  
+      <img src="logo.jpg" alt="Logo">  
+    </div>  
+    <div>  
+      <h4>Categories</h4>  
+      <p>Phones & Tablet<br>Computer<br>Accessories<br>Electronics</p>  
+    </div>  
+    <div>  
+      <h4>Contact</h4>  
+      <p>WhatsApp: +234 9011 727 900<br>Email: support@phonestore.com</p>  
+      <a href="https://wa.me/2349011727900" target="_blank">  
+        <img src="w.png" alt="WhatsApp">  
+      </a>  
+    </div>  
+    <div>  
+      <h4>Why Us?</h4>  
+      <p>Original Products<br>Secure Payment<br>Fast Delivery</p>  
+      <img src="s.png" alt="Secure">  
+    </div>  
+  </div>    <div class="footer-bottom">  
+    ©ProsperGadget. All rights reserved.  
+  </div>  
+</footer>  <script>  
+/* MOBILE MENU TOGGLE */  
+function toggleMenu(){  
+  const menu = document.getElementById("mobileMenu");  
+  const menuBtn = document.querySelector(".menu-btn");  
+    
+  menu.classList.toggle("open");  
+  
+  // Change hamburger to X when menu is open  
+  menuBtn.textContent = menu.classList.contains("open") ? "✖" : "☰";  
+}  
+  
+/* DESKTOP DROPDOWN TOGGLE */  
+function toggleDropdown(id){  
+  const drop = document.getElementById(id);  
+  const allDrops = document.querySelectorAll(".dropdown-menu");  
+  allDrops.forEach(d=>{ if(d.id!==id) d.classList.remove("show"); });  
+  drop.classList.toggle("show");  
+}  
+  
+/* MOBILE SUBMENU TOGGLE */  
+function toggleMobile(id){  
+  const sub = document.getElementById(id);  
+  sub.classList.toggle("show");  
+}  
+  
+/* SLIDER */  
+const slides = [  
+  "mrp2.jpg",  
+  "slide1.png",  
+  "slide2.jpg",  
+  "he.png"  
+];  
+let slideIndex = 0;  
+setInterval(()=>{  
+  slideIndex = (slideIndex+1) % slides.length;  
+  document.getElementById("slide").src = slides[slideIndex];  
+},7000);  
+  
+const WHATSAPP_NUMBER = "2349011727900"; // no + sign  
+  
+/* PRODUCT DATA */  
+/* PRODUCT DATA */  
+const products = [  
+  /* PHONES & TABLET */  
+  {brand:"Redmi",model:"A3X (64GB / 3GB)",price:"₦105,000",category:"Phones & Tablet",image:"a3.jpeg",},  
+  {brand:"Redmi",model:"15C (128GB / 6GB)",price:"₦160,000",category:"Phones & Tablet",image:"15c1.jpeg",link:"#"},  
+  {brand:"Redmi",model:"15C (256GB / 8GB)",price:"₦180,000",category:"Phones & Tablet",image:"15c2.jpeg",link:"#"},  
+  {brand:"Redmi",model:"14C",price:"₦135,000",category:"Phones & Tablet",image:"14c.jpeg",link:"#"},  
+  {brand:"Villaon",model:"V40",price:"₦90,000",category:"Phones & Tablet",image:"v40.jpg",link:"#"},  
+  {brand:"Itel",model:"A06",price:"₦90,000",category:"Phones & Tablet",image:"itela.jpeg",link:"#"},  
+  {brand:"Itel",model:"P70",price:"₦135,000",category:"Phones & Tablet",image:"p7.jpeg",link:"#"},  
+  {brand:"Itel",model:"City 100",price:"₦135,000",category:"Phones & Tablet",image:"c100.png",link:"#"},  
+  {brand:"Infinix",model:"Hot 50i",price:"₦150,000",category:"Phones & Tablet",image:"50i.jpeg",link:"#"},  
+  {brand:"Infinix",model:"Hot 60i",price:"₦160,000",category:"Phones & Tablet",image:"in60.jpeg",link:"#"},  
+  {brand:"Infinix",model:"Smart 9",price:"₦150,000",category:"Phones & Tablet",image:"sm9.jpg",link:"#"},  
+  {brand:"Oppo",model:"A3",price:"₦240,000",category:"Phones & Tablet",image:"op3.jpeg",link:"#"},  
+  {brand:"Tecno",model:"Pop 9",price:"₦115,000",category:"Phones & Tablet",image:"pop9.jpeg",link:"#"},  
+  
+  
+  /* COMPUTER */  
+  {brand:"HP",model:"Laptop 14",category:"Computer",image:"hp.jpeg",},  
+  {brand:"Dell",model:"Laptop XPS",category:"Computer",image:"dell.png"},  
+   {name: "Asus ZenBook 13", category: "Computer", image: "asus.jpeg"},
+  {name: "Lenovo ThinkPad X1", category: "Computer", image: "len.jpeg"},
+  
+  
+  /* ACCESSORIES */  
+ /* ACCESSORIES / POWER BANKS */  
+{brand:"BASEUS", model:"PB-20K MAH", price:"₦21,000", category:"Accessories", image:"ba.jpeg"},  
+{brand:"ORAIMO", model:"PB-27K MAH", price:"₦25,000", category:"Accessories", image:"or.jpeg"},  
+{brand:"INFINIX", model:"PB-20K MAH", price:"₦25,000", category:"Accessories", image:"in.jpg"},  
+{brand:"ORAIMO", model:"PB-40K MAH", price:"₦42,500", category:"Accessories", image:"or2.jpeg"},  
+{brand:"NEW AGE", model:"PB-55K MAH", price:"₦60,000", category:"Accessories", image:"new.jpeg"},  
+{brand:"NEW AGE", model:"PB-12.5K MAH", price:"₦15,000", category:"Accessories", image:"new2.jpeg"},  
+{brand:"INFINIX", model:"PB-10K MAH", price:"₦15,000", category:"Accessories", image:"in2.png"},  
+{brand:"POOLEE", model:"PB-20K MAH", price:"₦20,000", category:"Accessories", image:"po.jpg"},  
+{brand:"ITEL", model:"PB-20K MAH", price:"₦20,000", category:"Accessories", image:"itel.jpeg"},  
+{brand:"ITEL", model:"PB-10K MAH", price:"₦12,000", category:"Accessories", image:"itel2.jpg"},  
+{brand:"ORAIMO", model:"PB-30K MAH", price:"₦30,000", category:"Accessories", image:"or3.jpeg"},  
+{brand:"MOL", model:"PB-20K MAH", price:"₦22,000", category:"Accessories", image:"mol.jpeg"},  
+{brand:"ORAIMO", model:"PB-22K MAH", price:"₦24,000", category:"Accessories", image:"or4.jpeg"},  
+{brand:"ORAIMO", model:"PB-20K MAH", price:"₦20,000", category:"Accessories", image:"or5.png"},  
+{brand:"NEW AGE", model:"PB-22.5K MAH", price:"₦23,000", category:"Accessories", image:"new3.avif"},  
+  
+  
+  /* GAMES */  
+/* GAMES AND CONSOLES (Images Only, 12 items) */
+{category:"Games and Consoles", image:"air1.jpeg", name:"AirPods"},
+{category:"Games and Consoles", image:"game2.png", name:"Game Pad"},
+{category:"Games and Consoles", image:"mp4.png", name:"Bluetooth Speaker"},
+{category:"Games and Consoles", image:"air3.jpeg", name:"AirPods"},
+{category:"Games and Consoles", image:"mp8.jpeg", name:"Bluetooth Speaker"},
+{category:"Games and Consoles", image:"game1.jpeg", name:"Game Pad"},
+{category:"Games and Consoles", image:"heads.jpeg", name:"Headset"},
+{category:"Games and Consoles", image:"game3.jpeg", name:"Game Pad"},
+{category:"Games and Consoles", image:"mp5.jpeg", name:"Bluetooth Speaker"},
+{category:"Games and Consoles", image:"mp2.jpeg", name:"Bluetooth Speaker"},
+{category:"Games and Consoles", image:"mp3.jpeg", name:"Bluetooth Speaker"},
+{category:"Games and Consoles", image:"mp1.jpeg", name:"Bluetooth Speaker"},
+  /* ELECTRONICS */  
+  
+];  
+  
+  
+/* DISPLAY PRODUCTS BY CATEGORY */  
+function displayCategory(category, id) {
+  const container = document.getElementById(id);
+  container.innerHTML = "";
+  const filtered = products.filter(p => p.category === category);
+  filtered.forEach(p => {
+    if (category === "Games and Consoles") {
+      // Only show image and name
+      container.innerHTML += `
+        <div class="product">
+          <img src="${p.image}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+            `Hello ProsperGadget 👋\n\nI want to buy this product:\n\nProduct: ${p.name}\n\nPlease send payment details.`
+          )}" target="_blank">
+            <button>Buy Now</button>
+          </a>
+        </div>
+      `;
+    } else {
+      // Default display for other categories
+      container.innerHTML += `
+        <div class="product">
+          <img src="${p.image}" alt="${p.model}">
+          <h3>${p.brand} ${p.model}</h3>
+          <p>${p.price}</p>
+          <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+            `Hello ProsperGadget 👋\n\nI want to buy this product:\n\nProduct: ${p.brand} ${p.model}\nPrice: ${p.price}\n\nPlease send payment details.`
+          )}" target="_blank">
+            <button>Buy Now</button>
+          </a>
+        </div>
+      `;
+    }
+  });
+}
+  
+/* INIT CATEGORIES ON PAGE LOAD */  
+window.onload = ()=>{  
+  displayCategory("Phones & Tablet","phonesGrid");  
+  displayCategory("Computer","laptopsGrid");  
+  displayCategory("Accessories","accessoriesGrid");  
+  displayCategory("Games and Consoles","gamesGrid");  
+  displayCategory("Electronics","electronicsGrid");  
+  displayLatest();  
+};  
+  
+/* SEARCH FUNCTION - FIXED FOR ALL CATEGORIES INCLUDING GAMES */
+function searchProduct() {
+  const query = document.getElementById("searchInput").value
+    .toLowerCase()
+    .trim();
+
+  if (!query) return; // do nothing if search is empty
+
+  // Map categories to grids
+  const gridMap = {
+    "Phones & Tablet": "phonesGrid",
+    "Computer": "laptopsGrid",
+    "Accessories": "accessoriesGrid",
+    "Games and Consoles": "gamesGrid",
+    "Electronics": "electronicsGrid"
+  };
+
+  // First, remove previous highlights
+  Object.values(gridMap).forEach(id => {
+    const grid = document.getElementById(id);
+    Array.from(grid.children).forEach(productDiv => {
+      productDiv.style.border = "none";   
+      productDiv.style.backgroundColor = "transparent";
+    });
+  });
+
+  // Find all matching products
+  const matches = products.filter(p => {
+    if (p.brand && p.model) {
+      return `${p.brand} ${p.model}`.toLowerCase().includes(query);
+    } else if (p.name) {
+      return p.name.toLowerCase().includes(query);
+    }
+    return false;
+  });
+
+  if (matches.length === 0) {
+    alert("No product found");
+    return;
+  }
+
+  // Highlight matching products
+  matches.forEach(p => {
+    const grid = document.getElementById(gridMap[p.category]);
+    Array.from(grid.children).forEach(productDiv => {
+      const titleEl = productDiv.querySelector("h3");
+      const title = titleEl ? titleEl.textContent.toLowerCase() : "";
+      if (title.includes(query)) {
+        productDiv.style.border = "2px solid #0a7cff";
+        productDiv.style.backgroundColor = "#f0f8ff";
+      }
+    });
+  });
+
+  // Scroll to first matching product
+  const firstMatch = matches[0];
+  const firstGrid = document.getElementById(gridMap[firstMatch.category]);
+  Array.from(firstGrid.children).forEach(productDiv => {
+    const titleEl = productDiv.querySelector("h3");
+    const title = titleEl ? titleEl.textContent.toLowerCase() : "";
+    if (title.includes(query)) {
+      productDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+  });
+}
+  
+/* CAROUSEL SLIDE */  
+const positions = {};  
+function slideLeft(id){  
+  positions[id] = (positions[id] || 0) + 1;  
+  document.getElementById(id).style.transform = `translateX(${positions[id]*50}%)`;  
+}  
+function slideRight(id){  
+  positions[id] = (positions[id] || 0) - 1;  
+  document.getElementById(id).style.transform = `translateX(${positions[id]*50}%)`;  
+}  
+  
+/* LATEST PRODUCTS */  
+function displayLatest(){  
+  const container = document.getElementById("latestGrid");  
+  container.innerHTML="";  
+  
+  // shuffle products randomly  
+  const shuffled = [...products].sort(() => 0.5 - Math.random());  
+  
+  // take first 8 random products  
+  shuffled.slice(0,8).forEach(p=>{  
+    container.innerHTML += `  
+    <div class="product">  
+      <img src="${p.image}" alt="${p.model}">  
+      <h3>${p.brand} ${p.model}</h3>  
+      <p>${p.price}</p>  
+<a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(  
+`Hello ProsperGadget 👋  
+  
+I want to buy this product:  
+  
+Product: ${p.brand} ${p.model}  
+Price: ${p.price}  
+  
+Please send payment details.`  
+)}" target="_blank">  
+  <button>Buy Now</button>  
+</a>  
+  
+    </div>`;  
+  });  
+}  
+  
+  
+  
+  
+/* ===== UNIVERSAL WHATSAPP CHECKOUT (OPTIONAL USE) ===== */  
+/* This allows one WhatsApp flow for ALL products */  
+/* Frontend only – no backend – no multiple payment links */  
+  
+function buyViaWhatsApp(brand, model, price) {  
+  const message = `Hello ProsperGadget 👋  
+  
+I want to buy the following product:  
+  
+Product: ${brand} ${model}  
+Price: ${price}  
+  
+Please send payment details.`;  
+  
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;  
+  window.open(url, "_blank");  
+}  
+  
+</script> 
+</body>  
+</html>  
